@@ -11,6 +11,7 @@
 <h3>인덱스페이지입니다.</h3>
 <ul>
 	<li><a href="member/list.do">회원정보</a></li>
+	<li><a href="member/insert.do">회원정보 추가</a></li>
 </ul>
 <h4>공지사항</h4>
 <ul>

@@ -60,9 +60,11 @@ public class MemberServiceImpl implements MemberService{
 		List<MemberDto> list = dao.getList();
 		
 		ModelAndView mView = new ModelAndView();
+		//Model 을 list 라는 키값으로 담는다. 
 		mView.addObject("list", list); //list를 list키값으로 addobject에 담아서
-		mView.setViewName("member/list"); //member/list view페이지로 기본디폴트인 forward이동해서 보낸다.
-		
+		//mView.setViewName("member/list"); //member/list view페이지로 기본디폴트인 forward이동해서 보낸다.
+		//위에 뷰페이지르 ㄹ지운이유는 컨트롤러에서 경로를 보기위해 그래야지 좋기때문에 모델만담아리턴한다.
+		//Model 이 담긴 ModelAndView 객체를 리턴한다.
 		return mView;
 	}
 

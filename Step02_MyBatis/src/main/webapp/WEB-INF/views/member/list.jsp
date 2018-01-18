@@ -8,6 +8,7 @@
 <title>member/list.jsp</title>
 </head>
 <body>
+
 <h3>회원 목록입니다.</h3>
 <table>
 	<thead>

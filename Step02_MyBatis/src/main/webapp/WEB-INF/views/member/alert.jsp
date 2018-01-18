@@ -5,18 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>home.jsp</title>
+<title>member/alert.jsp</title>
 </head>
 <body>
-<h3>인덱스페이지입니다.</h3>
-<ul>
-	<li><a href="member/list.do">회원정보</a></li>
-</ul>
-<h4>공지사항</h4>
-<ul>
-	<c:forEach var="tmp" items="${news }">
-		<li>${tmp }</li>
-	</c:forEach>
-</ul>
+<h3>알림 페이지</h3>
+<p>${msg }</p>
+<a href="${pageContext.request.contextPath }/member/list.do">회원 목록보기</a>
 </body>
 </html>

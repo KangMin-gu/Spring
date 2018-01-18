@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 		//msg 라는 키값으로 String type 을 담는다.
 		mView.addObject("msg", "저장했습니다."); //request.setAttribute 담는걸 이렇게 한다.
 		//View 페이지의 정보를 담고
-		mView.setViewName("member/alert");
+		//mView.setViewName("member/alert");
 		
 		
 		//리턴해준다.
@@ -38,20 +38,32 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public ModelAndView update(MemberDto dto) {
+		dao.update(dto);
 		
-		return null;
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("msg", "회원 정보를 수정했습니다.");
+		
+		return mView;
 	}
 
 	@Override
-	public ModelAndView delete(int num) {
-		
-		return null;
+	public void delete(int num) {
+		//Dao 를 이용해서 삭제한다.
+		dao.delete(num);
+		//return을 안하는이유는 삭제하고 리턴할게 없음으로 void를 타입으로줌으로써 return을 없앤다.
+		//만약 수정사항이 있다면 인터페이스도 수정해야한다.-> 인터페이스에서 임플해서 사용함으로!
 	}
 
 	@Override
 	public ModelAndView getData(int num) {
 		
-		return null;
+		//수정할 회원의 정보를 얻어와서
+		MemberDto dto = dao.getData(num);
+		//ModelAndView 객체에 담고
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dto);
+		//리턴해 준다.
+		return mView;
 	}
 
 	@Override
@@ -67,5 +79,5 @@ public class MemberServiceImpl implements MemberService{
 		//Model 이 담긴 ModelAndView 객체를 리턴한다.
 		return mView;
 	}
-
+	
 }

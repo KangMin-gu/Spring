@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<!-- MemberServiceImpl 객체를 bean 으로 만들기 -->
+	<bean class="test.service.MemberServiceImpl" />
+ 	<bean class="test.service.BoardServiceImpl" />
+ 	
+	<!-- PrintLogAspect 객체를 Bean으로 만들고 id 부여하기 -->
+	<bean id="myAspect" class="test.aspect.PrintLogAspect" />
+	
+	<!-- aop 설정 -->
+	<aop:config>
+		<aop:pointcut expression="execution(public void insert())" id="myPoint"/> <!-- 아래 aop:around 참조 -->
+		<aop:pointcut expression="execution(public void select())" id="youPoint"/>
+		<aop:aspect ref="myAspect"> <!-- 위에 id를 부여한 bean 객체 참조 -->
+			<aop:around method="PrintLog" pointcut-ref="myPoint"/>
+			<aop:around method="PrintLog1" pointcut-ref="youPoint"/>
+		</aop:aspect>
+	</aop:config>
+	
+
+	
+<!-- 
+
+bean container에서 관리하는 객체중에 test.service.MemberServiceImpl 안에 execution(public void insert())
+모양의 메소드가 수행될때 myAspect 에 있는 객체에
+ PrintLog라는 메소드 를 execution(public void insert())에 적용해라
+- 메소드 이전 after 이후 before 둘다 합쳐서 around 
+
+ -->
+</beans>

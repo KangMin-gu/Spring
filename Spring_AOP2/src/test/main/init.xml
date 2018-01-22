@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	<!-- MemberServiceImpl 객체를 bean 으로 등록하기 
+	(bean/으로 안만들어도 component scan으로 @service하면 등록할수있다.)-->
+	<context:component-scan base-package="test.service"/>
+	
+	<!-- PringLogApect 객체를 bean 으로 등록하기 
+	(bean/으로 안만들어도 component scan으로 @Apect하면 등록할수있다.)-->
+	<context:component-scan base-package="test.aspect"/>
+	
+	<!-- 어노테이션 기반으로 aop를 적용하기 위한 설정 -->
+	<aop:aspectj-autoproxy/>
+</beans>

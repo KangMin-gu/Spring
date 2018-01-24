@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- Mapper 에서 사용할 Dto 별칭 정의하기 -->
+	<typeAliases>
+		<typeAlias type="com.gura.step04.users.dto.UsersDto" alias="usersDto"/>
+		<typeAlias type="com.gura.step04.file.dto.FileDto" alias="fileDto"/>
+	</typeAliases>
+	
+	<!-- sql 문을 정의하고 있는 xml 문서 -->
+	<mappers>
+		<mapper resource="com/gura/step04/mybatis/UsersMapper.xml"/>
+		<mapper resource="com/gura/step04/mybatis/FileMapper.xml"/>
+	</mappers>	
+	
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

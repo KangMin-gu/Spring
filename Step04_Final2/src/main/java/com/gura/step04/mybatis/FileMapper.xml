@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="file">
+	<select id="getList" resultType="fileDto">
+		select num,writer,title,orgFileName,fileSize,regdate
+		from board_data
+		order by num desc
+	</select>
+	<insert id="insert" parameterType="fileDto">
+		insert into board_data
+		(num,writer,title,orgFileName,saveFileName,fileSize,regdate)
+		values(board_data_seq.Nextval, #{writer}, #{title}, #{orgFileName}
+		, #{saveFileName}, #{fileSize}, sysdate)
+	</insert>
+	
+	<select id="getData" parameterType="int" resultType="fileDto">
+		SELECT num, writer, title, orgFileName, saveFileName, fileSize, regdate
+		from board_data
+		where num=#{num}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_data
+		WHERE num=#{num}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

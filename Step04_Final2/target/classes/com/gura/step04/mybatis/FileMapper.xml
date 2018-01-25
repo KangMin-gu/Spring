@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="file">
-	<select id="getList" resultType="fileDto">
-		select num,writer,title,orgFileName,fileSize,regdate
-		from board_data
-		order by num desc
+	<select id="getCount" parameterType="fileDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)<!-- nvl의 max값이 null 이면 0으로 지정하겠다. -->
+		FROM board_data
+		<!-- 동적쿼리 fileDto가 널이아니면? -->
+		<where><!-- 키워드가있으면 키워드에맞는 로우넘버 없으면 전체 로우넘버 -->
+			<if test="writer != null"> 
+				OR writer LIKE '%'||#{writer}||'%' 
+				<!--null이아니면 form 뒤에 writer가 gura면 이렇게 써짐 where writer LIKE '%gura%'
+				OR은 다른조건없으면 알아서 batis가 빼버림 
+				||-> 연결연산자 %->문자열아무거나와도됨이라는뜻 
+				"aa"+"bb"=>"aabb" java  'aa'||'bb' => 'aabb' oracle -->
+			</if>
+			<if test="title != null">
+				OR title LIKE '%'||#{title}||'%'
+			</if>	
+			<if test="orgFileName != null">
+				OR orgFileName LIKE '%'||#{orgFileName}||'%'
+			</if>					
+		</where>		
 	</select>
+
+	<select id="getList" parameterType="fileDto" resultType="fileDto">
+		SELECT *<!-- 정보가져오기 -->
+		FROM <!-- rownum 붙이기 -->(SELECT result1.*,ROWNUM rnum
+			  FROM <!-- 정렬시작 -->(SELECT num,writer,title,orgFileName,fileSize,
+			  		TO_CHAR(regdate, 'YYYY.MM.DD AM HH"시 "MM"분"') regdate
+			  		FROM board_data 
+			  		<where> <!-- 원하는 데이터가 잇을수도 없을수도있다. -->
+						<if test="writer != null">
+							OR writer LIKE '%'||#{writer}||'%'
+						</if>
+						<if test="title != null">
+							OR title LIKE '%'||#{title}||'%'
+						</if>
+						<if test="orgFileName != null">
+							OR orgFileName LIKE '%'||#{orgFileName}||'%'
+						</if>
+					</where>	
+			  		ORDER BY num DESC) result1 <!-- 정렬끝 -->
+			  )<!-- rownum 붙이기 -->
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}<!--스타트넘부터 로우넘사이에있는거 정보가져오기 -->
+	</select>
+	
 	<insert id="insert" parameterType="fileDto">
 		insert into board_data
 		(num,writer,title,orgFileName,saveFileName,fileSize,regdate)

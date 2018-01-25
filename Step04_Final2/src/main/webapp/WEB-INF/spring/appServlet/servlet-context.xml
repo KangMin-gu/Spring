@@ -58,7 +58,7 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10240000"/>	
 	</beans:bean>
-	<!-- Abstract view 가 동작하도록 설정 -->
+	<!-- file download의 Abstract view 가 동작하도록 설정 -->
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"/> 
 		<!-- name=order 이며 value=0 (우선순위 0순위 설정)
@@ -70,6 +70,8 @@
 	<context:component-scan base-package="com.gura.step04.users.*"/>
 	<!-- com.gura.step04.file 하위의 모든 패키지 스캔하기 -->
 	<context:component-scan base-package="com.gura.step04.file.*"/>
+	<!-- com.gura.step04.cafe 하위의 모든 패키지 스캔하기  -->
+	<context:component-scan base-package="com.gura.step04.cafe.*"/>
 	
 	
 	<!-- AOP패키지를 컴퍼넌트할수 있게 스캔 -->

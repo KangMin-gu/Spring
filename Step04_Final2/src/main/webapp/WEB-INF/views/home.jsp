@@ -6,26 +6,30 @@
 <head>
 <meta charset="UTF-8">
 <title>home.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 </head>
 <body>
-<h3>인덱스페이지입니다.</h3>
-<c:choose>
-	<c:when test="${empty id }">
-		<a href="users/loginform.do">로그인</a>
-		<a href="users/signup_form.do">회원가입</a><br/>
-		<a href="users/info.do?name=gura&addr=nrg">테스트 유저정보 보기 링크</a><br/>
-
-	</c:when>
-	<c:otherwise>
-		<p><strong><a href="users/info.do">${id }</a></strong> 님 로그인 중 ...</p>
-		<a href="users/logout.do">로그아웃</a>
-	</c:otherwise>
-</c:choose>
-
-<ul>
-	<li><a href="file/list.do">자료실 목록보기</a></li>
-</ul>
-
+<div class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${pageContext.request.contextPath }/home.do">Acorn</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="file/list.do">자료실 목록보기</a></li>
+			<li><a href="cafe/list.do">카페 글 목록보기</a></li>
+		</ul>
+		<c:choose>
+			<c:when test="${not empty id }">
+				<a class="btn btn-warning btn-xs navbar-btn pull-right" href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
+				<p class="navbar-text pull-right"><a class="navbar-link" href="${pageContext.request.contextPath }/users/info.do"><strong>${id }</strong></a>님 로그인중... </p>
+			</c:when>
+			<c:otherwise>
+				<a class="navbar-text navbar-link pull-right" href="${pageContext.request.contextPath }/users/loginform.do?url=${pageContext.request.contextPath}/file/list.do">로그인</a>
+			</c:otherwise>
+		</c:choose>
+		
+	</div>
+</div>
 
 <h4>공지사항</h4>
 <ul>

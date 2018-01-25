@@ -19,9 +19,13 @@ public class FileController {
 	private FileService fileService;
 	
 	@RequestMapping("/file/list")
-	public ModelAndView list(){
-		ModelAndView mView = fileService.list();
-		mView.setViewName("file/list");
+	public ModelAndView list(HttpServletRequest request){
+		//여러가지 정보가 담긴 ModelAndVIew 객체를 서비스로 부터
+		//리턴 받아서 
+		ModelAndView mView = fileService.list(request);
+		//view 페이지 정보를 담고 
+		mView.setViewName("file/list"); //forward 이동 
+		//Spring Framework 에 리턴해 준다. 
 		return mView;
 	}
 	

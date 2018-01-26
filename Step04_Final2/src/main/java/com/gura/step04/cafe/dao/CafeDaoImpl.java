@@ -16,26 +16,25 @@ public class CafeDaoImpl implements CafeDao{
 
 	@Override
 	public void insert(CafeDto dto) {
-		// TODO Auto-generated method stub
-		
+		// parameterType => CafeDto
+		session.insert("cafe.insert", dto);
 	}
 
 	@Override
 	public void update(CafeDto dto) {
-		// TODO Auto-generated method stub
+		session.update("cafe.update", dto);
 		
 	}
 
 	@Override
-	public void delete(CafeDto dto) {
-		// TODO Auto-generated method stub
-		
+	public void delete(int num) {
+		session.delete("cafe.delete", num);
 	}
 
 	@Override
 	public CafeDto getData(CafeDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return session.selectOne("cafe.getData", dto);
 	}
 	
 	//글의 목록(검색어에 일치하는) 리턴하기
@@ -58,8 +57,14 @@ public class CafeDaoImpl implements CafeDao{
 
 	@Override
 	public void increaseViewCount(int num) {
-		// TODO Auto-generated method stub
+		session.update("cafe.addCount", num);
 		
+	}
+	
+	@Override
+	public CafeDto getData(int num) {
+	
+		return session.selectOne("cafe.getData2", num);
 	}
 
 }

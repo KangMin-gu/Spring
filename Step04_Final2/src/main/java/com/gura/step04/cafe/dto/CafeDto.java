@@ -10,11 +10,14 @@ public class CafeDto { //Data Transfer Object(Dto) , value Object(Vo)
 	//페이징 처리 고려
 	private int startRowNum;
 	private int endRowNum;
+	//이전글 다음글의 글번호
+	private int prevNum;
+	private int NextNum;
 	
 	public CafeDto(){}
 
 	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
-			int endRowNum) {
+			int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -24,6 +27,8 @@ public class CafeDto { //Data Transfer Object(Dto) , value Object(Vo)
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
+		this.prevNum = prevNum;
+		NextNum = nextNum;
 	}
 
 	public int getNum() {
@@ -90,7 +95,22 @@ public class CafeDto { //Data Transfer Object(Dto) , value Object(Vo)
 		this.endRowNum = endRowNum;
 	}
 
-	
+	public int getPrevNum() {
+		return prevNum;
+	}
+
+	public void setPrevNum(int prevNum) {
+		this.prevNum = prevNum;
+	}
+
+	public int getNextNum() {
+		return NextNum;
+	}
+
+	public void setNextNum(int nextNum) {
+		NextNum = nextNum;
+	}
+
 	
 	
 }

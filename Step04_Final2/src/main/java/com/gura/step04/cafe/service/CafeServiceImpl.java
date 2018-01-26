@@ -24,19 +24,12 @@ public class CafeServiceImpl implements CafeService {
 
 	@Override
 	public void insert(CafeDto dto) {
-		// TODO Auto-generated method stub
-
+		cafeDao.insert(dto);
 	}
 
 	@Override
-	public void update(CafeDto dto) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(CafeDto dto) {
-		// TODO Auto-generated method stub
+	public void delete(int num) {
+		cafeDao.delete(num);
 
 	}
 
@@ -113,14 +106,73 @@ public class CafeServiceImpl implements CafeService {
 
 	@Override
 	public ModelAndView detail(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		//검색과 관련된 파라미터를 읽어와 본다.
+		String keyword=request.getParameter("keyword");
+		String condition=request.getParameter("condition");
+		
+		ModelAndView mView=new ModelAndView();
+		
+		//검색 조건을 알려주기 위한 메세지
+		String msg = null;
+		
+		
+		//CafeDto 객체를 생성해서
+		CafeDto dto=new CafeDto();
+		if(keyword != null){ //검색어가 전달된 경우
+			if(condition.equals("titlecontent")){ //제목+내용 검색
+				dto.setTitle(keyword);
+				dto.setContent(keyword);
+				msg="키워드 : "+keyword+" 에 대한 제목 내용 검색결과";
+			}else if(condition.equals("title")){//제목 검색
+				dto.setTitle(keyword);
+				msg="키워드 : "+keyword+" 에 대한 제목 검색결과";
+			}else if(condition.equals("writer")){//작성자 검색
+				dto.setWriter(keyword);
+				msg="키워드 : "+keyword+" 에 대한 작성자 검색결과";
+			}
+			
+			mView.addObject("condition", condition);
+			mView.addObject("keyword", keyword);
+			//어떤 검색인지 메세지를 담는다.
+			mView.addObject("msg", msg);
+		}
+		
+		//1. 파라미터로 전달되는 글번호를 읽어온다.
+		int num=Integer.parseInt(request.getParameter("num"));
+		dto.setNum(num); //글번호도 dto 에 담는다.
+		
+		//2. 글의 조회수를 1 올린다.
+		cafeDao.increaseViewCount(num);
+		
+		//3. 글번호에 해당되는 글정보를 얻어온다.
+		CafeDto resultDto=cafeDao.getData(dto);	 //dto를 넘긴건 검색어때문에 
+		
+		mView.addObject("dto", resultDto);
+		
+		return mView;
 	}
 
 	@Override
 	public void increaseViewCount(int num) {
-		// TODO Auto-generated method stub
+		
 
+	}
+
+	@Override
+	public void update(CafeDto dto) {
+		cafeDao.update(dto);
+		
+	}
+
+	@Override
+	public ModelAndView detail(int num) {
+		//글 번호를 이용해서 글정보를 얻어와서
+		CafeDto dto = cafeDao.getData(num);
+		//ModelAndView 객체에 담아서
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dto);
+		//리턴해 준다. 
+		return mView;
 	}
 
 }

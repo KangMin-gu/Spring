@@ -19,18 +19,6 @@ public class UsersDaoImpl implements UsersDao{
 	}
 
 	@Override
-	public boolean isValid(UsersDto dto) {
-		
-		UsersDto resultDto = session.selectOne("users.isValid", dto);
-		
-		if(resultDto == null){//id 혹은 비밀번호가 틀린 경우 
-			return false;
-		}else{
-			return true;
-		}
-	}
-
-	@Override
 	public UsersDto getData(String id) {
 		
 		return session.selectOne("users.getData", id);

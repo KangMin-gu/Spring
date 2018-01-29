@@ -8,14 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.step04.cafe.dao.CafeCommentDao;
 import com.gura.step04.cafe.dao.CafeDao;
+import com.gura.step04.cafe.dto.CafeCommentDto;
 import com.gura.step04.cafe.dto.CafeDto;
 
 @Service
 public class CafeServiceImpl implements CafeService {
-
+	/*
+	 * 하나의서비스에서여러개의 dao에 의존할수도 있다.
+	 */
 	@Autowired
 	private CafeDao cafeDao;
+	
+	@Autowired
+	private CafeCommentDao commentDao;
 
 	// 한 페이지에 나타낼 로우의 갯수
 	private static final int PAGE_ROW_COUNT = 3;
@@ -146,16 +153,18 @@ public class CafeServiceImpl implements CafeService {
 		
 		//3. 글번호에 해당되는 글정보를 얻어온다.
 		CafeDto resultDto=cafeDao.getData(dto);	 //dto를 넘긴건 검색어때문에 
-		
 		mView.addObject("dto", resultDto);
+		//4. 글번호에 해당되는 덧글 목록 읽어오기
+		List<CafeCommentDto> commentList=commentDao.getList(num);
+		mView.addObject("commentList", commentList);
+		//5. 로그인 했는지 여부도 담기 
+		boolean isLogin = false;
+		if(request.getSession().getAttribute("id")!=null){
+			isLogin=true;
+		}
+		mView.addObject("isLogin", isLogin);
 		
 		return mView;
-	}
-
-	@Override
-	public void increaseViewCount(int num) {
-		
-
 	}
 
 	@Override
@@ -173,6 +182,38 @@ public class CafeServiceImpl implements CafeService {
 		mView.addObject("dto", dto);
 		//리턴해 준다. 
 		return mView;
+	}
+
+	@Override
+	public void commentInsert(HttpServletRequest request) {
+		//1. 파라미터로 전달되는 덧글 정보 읽어오기
+		String writer=request.getParameter("writer");
+		int ref_group=Integer.parseInt
+				(request.getParameter("ref_group"));
+		String target_id=request.getParameter("target_id");
+		String content=request.getParameter("content");
+		//덧글 내에서의 그룹번호를 읽어온다. 
+		//null 이면 원글에 대한 덧글이고 아니면 덧글에 대한 덧글이다.
+		String comment_group=request.getParameter("comment_group");
+		//저장할 덧글 번호를 미리 읽어온다.
+		int seq=commentDao.getSequence();
+		
+		//2. 새 덧글 정보를 dto 에 담고
+		CafeCommentDto dto=new CafeCommentDto();
+		dto.setNum(seq);
+		dto.setWriter(writer);
+		dto.setTarget_id(target_id);
+		dto.setContent(content);
+		dto.setRef_group(ref_group);
+		if(comment_group==null){//원글에 대한 덧글인 경우
+			//덧글의 그룹번호를 덧글의 글번호와 같게 설정한다.
+			dto.setComment_group(seq);
+		}else{//덧글의 덧글인 경우 
+			//파라미터로 넘어온 덧글의 그룹번호를 넣어준다.
+			dto.setComment_group(Integer.parseInt(comment_group));
+		}
+		//3. DB 에 저장하고
+		commentDao.insert(dto);		
 	}
 
 }

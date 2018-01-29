@@ -27,6 +27,7 @@
 				<a class="navbar-text navbar-link pull-right" href="${pageContext.request.contextPath }/users/loginform.do?url=${pageContext.request.contextPath}/file/list.do">로그인</a>
 			</c:otherwise>
 		</c:choose>
+				<a href="${pageContext.request.contextPath }/users/signup_form.do">회원가입</a>
 		
 	</div>
 </div>

@@ -91,6 +91,17 @@ public class CafeController {
 		
 		return mView;
 	}
+	
+	//덧글 추가하는 요청 처리
+	@RequestMapping("/cafe/comment_insert")
+	public ModelAndView authCommentInsert(HttpServletRequest request){
+		cafeService.commentInsert(request);
+		
+		//글 번호를 읽어와서 글 자세히 보기 페이지로 리다일렉트 이동
+		String num = request.getParameter("ref_group");
+		
+		return new ModelAndView("redirect:/cafe/detail.do?num="+num);
+	}
 }
 
 

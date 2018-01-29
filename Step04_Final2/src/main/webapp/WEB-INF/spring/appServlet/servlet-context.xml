@@ -73,10 +73,11 @@
 	<!-- com.gura.step04.cafe 하위의 모든 패키지 스캔하기  -->
 	<context:component-scan base-package="com.gura.step04.cafe.*"/>
 	
-	
 	<!-- AOP패키지를 컴퍼넌트할수 있게 스캔 -->
 	<context:component-scan base-package="com.gura.step04.aspect"/>
-
+	
+	<context:component-scan base-package="com.gura.step04.util"/>
+	
 	<!-- 어노테이션 기반으로 aop 적용할수 있도록 설정 -->
 	<aop:aspectj-autoproxy/>
 	

@@ -6,6 +6,36 @@
 		from shop
 		order by num ASC
 	</select>
+	
+	<select id="getPrice" parameterType="int" resultType="int">
+		select price from shop where num=#{num}
+	</select>
+	
+	<update id="minusMoney" parameterType="shopDto">
+		UPDATE client_account
+		set money = money-#{price}
+		where id=#{id}
+	</update>
+	
+	<update id="plusPoint" parameterType="shopDto">
+		update client_account
+		set point=point + #{price}*0.1
+		where id=#{id}
+	</update>
+	
+	<update id="minusCount" parameterType="int">
+		update shop 
+		set remainCount = remainCount-1
+		where num=#{num}
+	</update>
+	<!--  remainCount 와 money 는 로직수행하다 오류가 날 가능성이있다 
+	 이유는테이블의 조건이 0보다 커야하기때문에  -->
+	 
+	 <insert id="addOrder" parameterType="orderDto">
+	 	insert into client_order (num, id, code, addr)
+	 	values(client_order_seq.nextVal, #{id}, #{code}, #{addr})
+	 </insert>
+	 
 </mapper>
 
 

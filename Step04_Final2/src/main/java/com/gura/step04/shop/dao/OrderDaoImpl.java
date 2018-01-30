@@ -14,7 +14,7 @@ public class OrderDaoImpl implements OrderDao{
 	
 	@Override
 	public void addOrder(OrderDto dto) {
-		
+		session.insert("shop.addOrder", dto);
 	}
 
 }

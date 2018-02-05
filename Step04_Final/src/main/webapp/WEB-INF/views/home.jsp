@@ -26,6 +26,8 @@
 	<li><a href="shop/list.do">상품 목록 보기</a></li>
 	<li><a href="shop/test1.do">예외 test</a></li>
 	<li><a href="shop/test1.do?name=gura">예외 test2</a></li>
+	<li><a href="html5/Step01_Canvas.html">Canvas</a></li>
+	<li><a href="html5/Step01_CanvasImage.html">Canvas2</a></li>
 </ul>
 
 <h4>공지사항</h4>

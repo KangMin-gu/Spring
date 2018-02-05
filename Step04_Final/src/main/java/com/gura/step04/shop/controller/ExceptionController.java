@@ -24,7 +24,7 @@ public class ExceptionController {
 	 *  DB 관련 작업도중 발생한 Exception 은 DataAccessException 
 	 *  type 으로 받을수 있다.
 	 */
-	@ExceptionHandler(DataAccessException.class)
+	@ExceptionHandler(DataAccessException.class) 
 	public ModelAndView 
 		handleDataAccessException(DataAccessException dae){
 		

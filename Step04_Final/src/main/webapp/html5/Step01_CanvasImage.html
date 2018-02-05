@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html5/Step01_CanvasImage.html</title>
+<style>
+	#myCanvas{
+		border: 1px solid red;
+	}
+</style>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<script src="/js/jquery-3.2.1.js"></script>
+<script>
+	var canvas = document.querySelector("#myCanvas");
+	var Context = canvas.getContext("2d");
+	
+	//켄바스에 렌더링 할 이미지 객체 
+	var rabbitImg=new Image();
+	rabbitImg.src="images/rabbit_1.png";
+	
+	//이미지 로딩이 완료 되었을때 실행할 함수 등록
+	rabbitImg.onload=function(){
+		//context 객체를 이용해서 이미지 그리기
+		context.drawImage(rabbitImg, 250, 250, 100, 100); //x, y, w, h
+	};
+	
+	$("#myCanvas").mousemove(function(event){
+		//사각형 영역 clear 하기 
+		context.clearRect(0, 0, 500, 500);
+		
+		//canvas 내에서의 마우스의 좌표 
+		var eventX = event.offsetX;
+		var eventY = event.offsetY;
+		//토끼의 좌표에 반영해서 그리기 
+		context.drawImage(rabbitImg, eventX-50, eventY-50, 100, 100);
+		
+	});
+
+	
+</script>
+</body>
+</html>

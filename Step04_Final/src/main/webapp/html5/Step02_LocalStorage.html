@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step02_LocalStorage.html</title>
+</head>
+<body>
+<input type="text"	id="inputMsg" />
+<button id="saveBtn">저장</button>
+<button id="loadBtn">불러오기</button>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+	$("#saveBtn").click(function(){
+		//1. 입력한 문자열을 읽어온다. 
+		var msg=$('#inputMsg').val();
+		//2. localStorage 에 저장한다. 
+		localStorage.msg=msg;
+		//3. 알림 띄우기
+		alert("저장했습니다.");
+	});
+	
+	$("#loadBtn").click(function(){
+		var msg=localStorage.msg;
+		$("#inputMsg").val(msg);
+		console.log(localStorage);
+	});	
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step02_localStorage2.html</title>
+</head>
+<body>
+
+	<input type="text" id="inputNum" placeholder="번호입력..."/>
+	<input type="text" id="inputName" placeholder="이름입력..."/>
+	<input type="text" id="inputAddr" placeholder="주소입력..."/>
+	<button id="saveBtn">저장</button>
+	<button id="loadBtn">불러오기</button>
+	<button id="deleteBtn">삭제</button>
+	
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+	
+	$("#saveBtn").click(function(){
+		//입력한 문자열 읽어오기
+		var num=$("#inputNum").val();
+		var name=$("#inputName").val();
+		var addr=$("#inputAddr").val();
+		//입력한 문자열을 object 에 담는다. 
+		var mem={num:num, name:name, addr:addr};
+		//JSON 문자열로 변환 (통째로 안들어가기 때문에 문자열로 변환하여 넣는다.)
+		var jsonMem=JSON.stringify(mem);
+		localStorage.mem=jsonMem;
+		
+		alert("저장하였습니다.");
+	});
+	
+	$("#loadBtn").click(function(){
+		//배열로 저장핸다.
+		var c = "mem";
+		var strMem=localStorage[a]; 
+		
+		var a=JSON.parse(strMem);
+		//var a = JSON.parse(localStorage.mem)
+		$("#inputNum").attr("value",a.num);
+		$("#inputName").attr("value",a.name);
+		$("#inputAddr").attr("value",a.addr);
+		console.log(a);
+		
+		//강사님이한것.
+		//$("#inputNum").val(a.num);
+		//$("#inputName").val(a.name);
+		//$("#inputAddr").val(a.addr);
+	});
+	
+	$("#deleteBtn").click(function(){
+		delete localStorage.mem;
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Example_DigitalClock.html</title>
+<style>
+	.clock img{
+		float: left;
+		width: 100px;
+	}
+	#console{
+		clear: left;
+	}
+</style>
+</head>
+<body>
+<div class="clock">
+	<img id="hour1" src="images/1.png"/>
+	<img id="hour2" src="images/2.png"/>
+	<img src="images/colon.png"/>
+	<img id="min1" src="images/1.png"/>
+	<img id="min2" src="images/5.png"/>
+	<img src="images/colon.png"/>
+	<img id="sec1" src="images/3.png"/>
+	<img id="sec2" src="images/4.png"/>		
+</div>
+<div id="console"></div>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+	
+	setInterval(showTime, 20);
+	
+	function showTime(){
+		//날짜 객체 생성하기
+		var date=new Date();
+		
+		//객체가 생성된 시점의 시,분,초를 읽어온다.
+		var hour=date.getHours();
+		var min=date.getMinutes();
+		var sec=date.getSeconds();
+		
+		var info=hour+":"+min+":"+sec;
+		$("#console").text(info);
+		
+		//초의 첫번째 자리 숫자 
+		var sec1=parseInt(sec/10); // 10으로 나누어서 소숫점 버리기
+		//초의 두번째 자리 숫자
+		var sec2=sec%10; // 10으로 나눈 나머지 
+		
+		//이미지의 src 속성에 반영하기 
+		$("#sec1").attr("src", "images/"+sec1+".png");
+		$("#sec2").attr("src", "images/"+sec2+".png");
+		
+		//분의 첫번째 자리 숫자
+		var min1 = parseInt(min/10);
+		//분의 두번째 자리 숫자
+		var min2 = min % 10;
+
+		$("#min1").attr("src", "images/"+min1+".png");
+		$("#min2").attr("src", "images/"+min2+".png");
+
+		//시간의 첫번째 자리 숫자
+		var hour1 = parseInt(hour/10);
+		//시간의 두번째 자리 숫자
+		var hour2 = hour % 10;
+
+		$("#hour1").attr("src", "images/"+hour1+".png");
+		$("#hour2").attr("src", "images/"+hour2+".png");
+	}
+	
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

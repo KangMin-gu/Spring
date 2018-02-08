@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Example_AnalogClock.html</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<script>
+	var canvas=document.getElementById("myCanvas");
+	var context=canvas.getContext("2d");
+
+	//시계 다이얼 이미지 로딩하기 
+	var dialImg=new Image();
+	dialImg.src="images/dial.png";
+
+	//초침 이미지 로딩하기
+	var secImg=new Image();
+	secImg.src="images/clock_sec.png";
+	//분침 
+	var minImg=new Image();
+	minImg.src="images/clock_min.png";
+	//시침 
+	var hourImg=new Image();
+	hourImg.src="images/clock_hour.png";
+	//포인트
+	var pointImg=new Image();
+	pointImg.src="images/clock_point.png";
+
+	setInterval(drawScreen, 20);
+
+	function drawScreen(){
+		//현재 시간을 얻어온다.
+		var date=new Date();
+		var hour=date.getHours();
+		var min=date.getMinutes();
+		var sec=date.getSeconds();
+
+		//초침의 회전각[rad] 얻어내기
+		var rSec = sec*6*(Math.PI/180);
+		//분침의 회전각 얻어내기
+		var rMin = min*6*(Math.PI/180) + 6*(sec/60)*(Math.PI/180);
+		//시침의 회전각 얻어내기
+		var rHour = hour*30*(Math.PI/180) + 30*(min/60)*(Math.PI/180);
+		
+		context.save();
+		//context 평행 이동
+		context.translate(250, 250);
+		//시계 다이얼 그리기 
+		context.drawImage(dialImg, -150, -150, 300, 300);
+		//초침의 회전각 만큼 context 회전 시키기 
+		context.rotate(rSec);
+		//초침 그리기
+		context.drawImage(secImg, -3, -130, 6, 130);
+		
+		//분침의 회전각 만큼 context 회전 시키기 
+		context.rotate(rMin-rSec);
+		//분침 그리기
+		context.drawImage(minImg, -3, -130, 6, 130);
+		
+		//시침의 회전각 만큼 context 회전 시키기
+		context.rotate(rHour-rMin);
+		context.drawImage(hourImg, -3, -130, 6, 130);
+		
+		//point 그리기
+		context.drawImage(pointImg, -5, -5, 10, 10);
+		
+		context.restore();
+	};
+
+
+	
+	
+</script>	
+</body>
+</html>
+
+
+
+
+

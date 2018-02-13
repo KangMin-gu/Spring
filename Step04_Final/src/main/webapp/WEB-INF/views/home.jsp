@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 모바일용 반응형 사이즈 설정 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalble=no"/>
 <title>home.jsp</title>
 </head>
 <body>
@@ -28,6 +30,9 @@
 	<li><a href="shop/test1.do?name=gura">예외 test2</a></li>
 	<li><a href="html5/Step01_Canvas.html">Canvas</a></li>
 	<li><a href="html5/Step01_CanvasImage.html">Canvas2</a></li>
+	<li><a href="html5/Step05_OrientationSensor.html">방향센서1</a></li>
+	<li><a href="html5/Step05_OrientationSensor2.html">방향센서2</a></li>
+	<li><a href="html5/Step06_GeoLocation.html"></a></li>
 </ul>
 
 <h4>공지사항</h4>

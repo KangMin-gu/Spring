@@ -8,6 +8,8 @@
 		http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<!-- jndi DataSource 얻어오는 설정
+			context.xml에 설정 정보를 명시하고 아래처럼 작성한다. -->
 	 <!--  DataSource 설정  실제 서버에서 simpledriver는 성능상 문제가 있어 바꾼다.
 	 id myoracle 는 server 의 context.xml의 리소스의 id를 쓴다.-->
 	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">

@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data-sources>
-	<data-source id="oracle_thin-161d0aee48d-357c3034942e3bbc" provider="oracle" driver="oracle_thin" name="Oracle - XE" save-password="true" show-system-objects="true" read-only="false">
-		<connection host="localhost" port="1521" server="" database="XE" url="jdbc:oracle:thin:@//localhost:1521/XE" user="scott" password="Bw0BJVMjpQ==" home="C:\oraclexe\app\oracle\product\10.2.0\server" type="dev">
-			<provider-property name="@dbeaver-sid-service@" value="SERVICE"/>
-			<provider-property name="@dbeaver-use-rule-hint@" value="false"/>
-			<provider-property name="@dbeaver-connection-type@" value="BASIC"/>
-			<provider-property name="@dbeaver-check-schema-content@" value="true"/>
-			<provider-property name="@dbeaver-always-show-dba@" value="false"/>
-			<network-handler type="PROXY" id="socks_proxy" enabled="false" save-password="false">
-				<property name="socks-port" value="1080"/>
-			</network-handler>
-			<network-handler type="TUNNEL" id="ssh_tunnel" enabled="false" save-password="false">
-				<property name="sshConnectTimeout" value="10000"/>
-				<property name="port" value="22"/>
-				<property name="authType" value="PASSWORD"/>
-			</network-handler>
-		</connection>
-	</data-source>
-	<data-source id="oracle_thin-161db5e3db7-2dcb8fbbd3906965" provider="oracle" driver="oracle_thin" name="Oracle - XE" save-password="true" show-system-objects="true" read-only="false">
-		<connection host="http://211.252.87.207" port="1521" server="" database="XE" url="jdbc:oracle:thin:@//http://211.252.87.207:1521/XE" user="scott" password="Bw0BJVMjpQ==" home="C:\oraclexe\app\oracle\product\10.2.0\server" type="dev">
+	<data-source id="oracle_thin-161db7903bf-16904e927df40519" provider="oracle" driver="oracle_thin" name="Oracle - XE" save-password="true" show-system-objects="true" read-only="false">
+		<connection host="211.252.87.207" port="1521" server="" database="XE" url="jdbc:oracle:thin:@//211.252.87.207:1521/XE" user="scott" password="Bw0BJVMjpQ==" home="C:\oraclexe\app\oracle\product\10.2.0\server" type="dev">
 			<provider-property name="@dbeaver-sid-service@" value="SERVICE"/>
 			<provider-property name="@dbeaver-use-rule-hint@" value="false"/>
 			<provider-property name="@dbeaver-connection-type@" value="BASIC"/>
